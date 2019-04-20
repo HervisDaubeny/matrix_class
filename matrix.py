@@ -55,11 +55,14 @@ class Matrix:
                 for j in range(res_size[1]):
                     row.append(int(0))
                 res.append(row)
-            for i in range(res_size[0]):
-                for j in range(res_size[1]):
-                    for k in range(?): '''Nasobeni.'''
-
-        return 1
+            for i in range(self.rows): 
+                for j in range(another.columns):
+                    for k in range(self.columns):
+                        res[i][j] += self.value[i][k] * another.value[k][j]
+            result = Matrix(res, res_size)
+            return result
+        else:
+            return 1
 
 
 def get_data(in_file):
@@ -87,13 +90,17 @@ if __name__ == '__main__':
         if type(mat_c) is Matrix:
             print(mat_c.value)
         else:
-            print('Matricies are not of the same type. Addition inposible.')
+            print('Matricies are not of the same type. Addition impossible.')
     if sys.argv[2] == '-':
         mat_c = mat_a - mat_b
         if type(mat_c) is Matrix:
             print(mat_c.value)
         else:
-            print('Matricies are not of the same type. Subtraction imposible.')
+            print('Matricies are not of the same type. Subtraction impossible.')
     if sys.argv[2] == '*':
-        .
+        mat_c = mat_a * mat_b
+        if type(mat_c) is Matrix:
+            print(mat_c.value)
+        else:
+            print('It is impossible to multiply first matrix by the second.')
     
