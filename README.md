@@ -6,8 +6,8 @@ Contains:
     Multiplication + size check
 
 Usage:
-    Currently it opens file given as script argument and does operation
-    (+, -, *) given as second argument.
+    The program opens file given as script argument and does 
+    operation (+, -, *) given as second argument.
 
 Input file format: #file needs to be formated for correct function
 
