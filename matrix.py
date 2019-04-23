@@ -13,6 +13,7 @@ class Matrix:
     columns = 0
 
     def __init__(self, value, size):
+        '''Constructor.'''
         self.value = value
         self.rows = size[0]
         self.columns = size[1]
@@ -22,6 +23,7 @@ class Matrix:
 
 
     def __add__(self, another):
+        '''Addition operator overload.'''
         if self.rows == another.rows and self.columns == another.columns:
             res = self.value
             for i in range(self.rows):
@@ -29,11 +31,11 @@ class Matrix:
                     res[i][j] += another.value[i][j]
             result = Matrix(res, (self.rows, self.columns))
             return result
-        else:
-            return 1
+        return 1
 
 
     def __sub__(self, another):
+        '''Subtraction operator overload.'''
         if self.rows == another.rows and self.columns == another.columns:
             res = self.value
             for i in range(self.rows):
@@ -41,11 +43,11 @@ class Matrix:
                     res[i][j] -= another.value[i][j]
             result = Matrix(res, (self.rows, self.columns))
             return result
-        else:
-            return 1
+        return 1
 
-    
+
     def __mul__(self, another):
+        '''Multiplication operator overload.'''
         if self.columns == another.rows:
             res = []
             res_size = (self.rows, another.columns)
@@ -55,14 +57,13 @@ class Matrix:
                 for j in range(res_size[1]):
                     row.append(int(0))
                 res.append(row)
-            for i in range(self.rows): 
+            for i in range(self.rows):
                 for j in range(another.columns):
                     for k in range(self.columns):
                         res[i][j] += self.value[i][k] * another.value[k][j]
             result = Matrix(res, res_size)
             return result
-        else:
-            return 1
+        return 1
 
 
 def get_data(in_file):
@@ -83,24 +84,23 @@ def get_data(in_file):
 
 if __name__ == '__main__':
     MATRICES = get_data(sys.argv[1])
-    mat_a = Matrix(MATRICES[0], MATRICES[1])
-    mat_b = Matrix(MATRICES[2], MATRICES[3])
+    MAT_A = Matrix(MATRICES[0], MATRICES[1])
+    MAT_B = Matrix(MATRICES[2], MATRICES[3])
     if sys.argv[2] == '+':
-        mat_c = mat_a + mat_b
-        if type(mat_c) is Matrix:
-            print(mat_c.value)
+        MAT_C = MAT_A + MAT_B
+        if isinstance(MAT_C, Matrix):
+            print(MAT_C.value)
         else:
             print('Matricies are not of the same type. Addition impossible.')
     if sys.argv[2] == '-':
-        mat_c = mat_a - mat_b
-        if type(mat_c) is Matrix:
-            print(mat_c.value)
+        MAT_C = MAT_A - MAT_B
+        if isinstance(MAT_C, Matrix):
+            print(MAT_C.value)
         else:
             print('Matricies are not of the same type. Subtraction impossible.')
     if sys.argv[2] == '*':
-        mat_c = mat_a * mat_b
-        if type(mat_c) is Matrix:
-            print(mat_c.value)
+        MAT_C = MAT_A * MAT_B
+        if isinstance(MAT_C, Matrix):
+            print(MAT_C.value)
         else:
             print('It is impossible to multiply first matrix by the second.')
-    

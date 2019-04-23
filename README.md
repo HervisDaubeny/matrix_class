@@ -19,3 +19,6 @@ Input file format: #file needs to be formated for correct function
     value value value ... value 		#first row with n values
     ...						#m - 1 rows
     value value value ... value			#m th row with n values
+
+Pylint score:
+    Your code has been rated at 9.87/10
