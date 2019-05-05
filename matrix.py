@@ -12,7 +12,7 @@ class Matrix:
     rows = 0
     columns = 0
 
-    def __init__(self, value, size):
+    def __init__(self, size, value):
         '''Constructor.'''
         self.value = value
         self.rows = size[0]
@@ -29,7 +29,7 @@ class Matrix:
             for i in range(self.rows):
                 for j in range(self.columns):
                     res[i][j] += another.value[i][j]
-            result = Matrix(res, (self.rows, self.columns))
+            result = Matrix((self.rows, self.columns), res)
             return result
         return 1
 
@@ -41,11 +41,12 @@ class Matrix:
             for i in range(self.rows):
                 for j in range(self.columns):
                     res[i][j] -= another.value[i][j]
-            result = Matrix(res, (self.rows, self.columns))
+            result = Matrix((self.rows, self.columns), res)
             return result
         return 1
 
 
+    #no problem with using for i and not using i itself
     def __mul__(self, another):
         '''Multiplication operator overload.'''
         if self.columns == another.rows:
@@ -61,64 +62,79 @@ class Matrix:
                 for j in range(another.columns):
                     for k in range(self.columns):
                         res[i][j] += self.value[i][k] * another.value[k][j]
-            result = Matrix(res, res_size)
+            result = Matrix(res_size, res)
             return result
         return 1
 
 
     def transpose(self):
         '''Transposition of given matrix.'''
-        for i in range(res_size[0]):
+        res = []
+        for i in range(self.rows):
             row = []
-            for j in range(res_size[1]):
+            for j in range(self.columns):
                 row.append(int(0))
             res.append(row)
         for i in range(self.rows):
             for j in range(self.columns):
-                res[i][j] = self[j][i]
-        result = Matrix(res, (self.rows, self.columns))
+                res[i][j] = self.value[j][i]
+        result = Matrix((self.rows, self.columns), res)
         return result
 
+
+#problem with using for i and not using i itself
 def get_data(in_file):
     '''Loads data from file and returns them. To be passed as arguments to
     Matrix class constructor.'''
     data_a = []
     data_b = []
     with open(in_file, 'r') as file:
+        #reading size of first matrix
         line = file.readline()
-        size_a = (int(line.split()[0]), int(line.split()[1]))
+        spl = line.split()
+        size_a = (int(spl[0]), int(spl[1]))
+        #reading values for first matrix
+        #i = 0
+        #while i < size_a[0]:
         for i in range(size_a[0]):
             data_a.append(file.readline().split())
+            #i += 1
+        #reading size of second matrix
         line = file.readline()
-        size_b = (int(line.split()[0]), int(line.split()[1]))
+        spl = line.split()
+        size_b = (int(spl[0]), int(spl[1]))
+        #reading values of second matrix
+        #i = 0
+        #while i < size_b[0]:
         for i in range(size_b[0]):
             data_b.append(file.readline().split())
-    return (data_a, size_a, data_b, size_b)
+            #i += 1
+    return (size_a, data_a, size_b, data_b)
 
 
 def get_b_v(in_file):
     '''Loads data for base A and vector b, that is to be approximated to the
     space created as span(A).'''
-    data_A = []
+    data_a = []
     data_b = []
     with open(in_file, 'r') as file:
-        test = true
-        while test:
+        while 1:
             line = file.readline()
-            if line '''chceck not EOF''':
-                spl = int(line.split(','))
-                row = [spl[0]**i for i in range(2,0,-1)]
-                data_A.append(row)
-                data_b.append(spl[1])
-            else:
-                pass '''set test false'''
-    return (data_A, (len(data
+            if line == "":
+                break
+            spl = line.split(',')
+            row = [int(spl[0])**i for i in range(2, -1, -1)]
+            data_a.append(row)
+            data_b.append(int(spl[1]))
+    return ((len(data_b), 3), data_a, (len(data_b), 1), data_b)
 
 
 
 if __name__ == '__main__':
     if sys.argv[2] == 'A':
         DATA = get_b_v(sys.argv[1])
+        print(DATA[1])
+        print(DATA[3])
     else:
         DATA = get_data(sys.argv[1])
         MAT_A = Matrix(DATA[0], DATA[1])
