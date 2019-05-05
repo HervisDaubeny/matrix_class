@@ -4,18 +4,18 @@ Contains:
     Addition + size check
     Subtraction + size check
     Multiplication + size check
+    Polynom of second rank approximation (operation A)
 
 Plan:
-    Approximation of given points in plane by polynom of second
-    degree. (Least squares method)
     Input from stdin.
     
 Usage:
     The program opens file given as script argument and does 
-    operation (+, -, *) given as second argument.
+    operation (+, -, *, A) given as second argument.
 
-Input file format: 
+Matrix calc input file format: 
     #file has to be in folowing format for correct function
+    #look to the file input.txt to see more
 
     rows columns 			#first matrix
     value value value ... value 		#first row with n values
@@ -26,5 +26,15 @@ Input file format:
     ...						#m - 1 rows
     value value value ... value			#m th row with n values
 
+Polynom approximation input file format:
+    #file needs to be in folowing format for correct function
+    #look to the file points.csv to see more
+
+    x_coord, y_coord	#first point
+    x_coord, y_coord	#second point
+    ...
+    x_coord, y_coord	#m-th point
+
 Pylint score:
-    Your code has been rated at 9.87/10
+    #just finished not pylint optimised yet
+    Your code has been rated at 9.62/10
